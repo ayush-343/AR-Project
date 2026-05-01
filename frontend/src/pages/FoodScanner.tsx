@@ -26,7 +26,6 @@ export const FoodScanner: React.FC = () => {
       setCurrentStep('results');
     } catch (err) {
       console.error('Analysis failed:', err);
-      setCurrentStep('camera');
     }
   };
 
