@@ -17,7 +17,7 @@ export class FoodAnalysisService {
         ? base64Image.split(',')[1]
         : base64Image;
 
-      const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+      const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash-latest' });
 
       const prompt = `Analyze this food image and extract the following information in JSON format:
 {
