@@ -3,9 +3,6 @@
   "buildCommand": "cd frontend && npm run build",
   "outputDirectory": "frontend/dist",
   "framework": "vite",
-  "env": {
-    "GEMINI_API_KEY": "@gemini_api_key"
-  },
   "rewrites": [
     {
       "source": "/api/:path*",
@@ -26,5 +23,14 @@
         }
       ]
     }
-  ]
+  ],
+  "experimentalServices": {
+    "frontend": {
+      "routePrefix": "/"
+    },
+    "backend": {
+      "entrypoint": "backend",
+      "routePrefix": "/_/backend"
+    }
+  }
 }
