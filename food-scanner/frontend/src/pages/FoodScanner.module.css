@@ -1,0 +1,50 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  background: #000;
+}
+
+.errorContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.errorContent {
+  background: white;
+  padding: 32px;
+  border-radius: 16px;
+  text-align: center;
+  max-width: 400px;
+}
+
+.errorContent h2 {
+  margin: 0 0 12px 0;
+  color: #333;
+  font-size: 20px;
+}
+
+.errorContent p {
+  margin: 0 0 24px 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.errorContent button {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.errorContent button:active {
+  transform: scale(0.95);
+}

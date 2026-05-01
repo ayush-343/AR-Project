@@ -1,0 +1,83 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  background: #000;
+}
+
+.imageContainer {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  user-select: none;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cropOverlay {
+  position: absolute;
+  border: 2px solid #667eea;
+  cursor: move;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+}
+
+.resizeHandle {
+  position: absolute;
+  bottom: -8px;
+  right: -8px;
+  width: 32px;
+  height: 32px;
+  cursor: se-resize;
+  background: radial-gradient(circle, #667eea 0%, transparent 70%);
+}
+
+.dark {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
+
+.controls {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  background: #1a1a1a;
+  justify-content: space-between;
+}
+
+.backButton,
+.cropButton {
+  flex: 1;
+  padding: 14px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    transform 0.2s,
+    opacity 0.2s;
+}
+
+.backButton {
+  background: #333;
+  color: white;
+}
+
+.backButton:active {
+  transform: scale(0.95);
+}
+
+.cropButton {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.cropButton:active {
+  transform: scale(0.95);
+}
