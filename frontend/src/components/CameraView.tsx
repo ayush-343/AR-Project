@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import styles from './CameraView.module.css';
 
 interface CameraViewProps {
@@ -8,34 +8,42 @@ interface CameraViewProps {
 export const CameraView: React.FC<CameraViewProps> = ({ onCapture }) => {
     const videoRef = useRef<HTMLVideoElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    const streamRef = useRef<MediaStream | null>(null);
     const [permission, setPermission] = useState<'pending' | 'granted' | 'denied' | 'not-requested'>('not-requested');
 
     const requestCameraAccess = async () => {
+        setPermission('pending');
         try {
             const stream = await navigator.mediaDevices.getUserMedia({
                 video: { facingMode: 'environment' },
                 audio: false,
             });
-
-            if (videoRef.current) {
-                videoRef.current.srcObject = stream;
-                setPermission('granted');
-            }
+            streamRef.current = stream;
+            setPermission('granted');
         } catch (err) {
             console.error('Camera error:', err);
             setPermission('denied');
         }
     };
 
+    // Attach stream to video element once both are available
+    useEffect(() => {
+        if (permission === 'granted' && videoRef.current && streamRef.current) {
+            videoRef.current.srcObject = streamRef.current;
+        }
+    }, [permission]);
+
+    // Cleanup stream on unmount
     useEffect(() => {
         return () => {
-            if (videoRef.current?.srcObject instanceof MediaStream) {
-                videoRef.current.srcObject.getTracks().forEach((track) => track.stop());
+            if (streamRef.current) {
+                streamRef.current.getTracks().forEach((track) => track.stop());
+                streamRef.current = null;
             }
         };
     }, []);
 
-    const handleCapture = () => {
+    const handleCapture = useCallback(() => {
         const video = videoRef.current;
         const canvas = canvasRef.current;
 
@@ -50,7 +58,7 @@ export const CameraView: React.FC<CameraViewProps> = ({ onCapture }) => {
 
         const imageData = canvas.toDataURL('image/jpeg', 0.85);
         onCapture(imageData);
-    };
+    }, [onCapture]);
 
     if (permission === 'denied') {
         return (
@@ -87,6 +95,19 @@ export const CameraView: React.FC<CameraViewProps> = ({ onCapture }) => {
                     >
                         🔐 Grant Camera Permission
                     </button>
+                </div>
+            </div>
+        );
+    }
+
+    if (permission === 'pending') {
+        return (
+            <div className={styles.container}>
+                <div className={styles.error}>
+                    <p>⏳ Requesting camera access...</p>
+                    <p style={{ fontSize: '14px', marginTop: '8px', opacity: 0.8 }}>
+                        Please allow camera access when prompted by your browser.
+                    </p>
                 </div>
             </div>
         );
