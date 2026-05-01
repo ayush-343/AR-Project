@@ -53,10 +53,10 @@ In Vercel Dashboard:
 2. Click **"Environment Variables"**
 3. Add these variables:
 
-| Name | Value | Comment |
-|------|-------|---------|
+| Name             | Value                  | Comment                                         |
+| ---------------- | ---------------------- | ----------------------------------------------- |
 | `GEMINI_API_KEY` | `your-gemini-key-here` | Get from https://aistudio.google.com/app/apikey |
-| `VITE_API_URL` | `/` | Relative URL for same-origin requests |
+| `VITE_API_URL`   | `/`                    | Relative URL for same-origin requests           |
 
 ## Step 4: Verify Deployment
 
@@ -73,28 +73,31 @@ After deployment completes:
 ### API Errors
 
 **Problem**: "Failed to analyze image"
+
 - Check GEMINI_API_KEY is set in Vercel environment
 - Verify API key is active in Google Cloud Console
 
 ### Build Failures
 
 **Problem**: "Command 'cd frontend && npm run build' failed"
+
 - Ensure all dependencies are in `frontend/package.json`
 - Check no local environment files are required
 
 ### Camera Not Working
 
 **Problem**: "Camera permission denied" on mobile
+
 - Use HTTPS (Vercel provides this automatically)
 - Clear browser cache and try again
 
 ## Project URLs After Deployment
 
-| Service | URL |
-|---------|-----|
-| Frontend | `https://food-scanner.vercel.app` |
+| Service      | URL                                          |
+| ------------ | -------------------------------------------- |
+| Frontend     | `https://food-scanner.vercel.app`            |
 | Health Check | `https://food-scanner.vercel.app/api/health` |
-| API | `https://food-scanner.vercel.app/api/` |
+| API          | `https://food-scanner.vercel.app/api/`       |
 
 ## Custom Domain (Optional)
 
