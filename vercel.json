@@ -1,10 +1,17 @@
 {
+  "installCommand": "cd frontend && npm install",
   "buildCommand": "cd frontend && npm run build",
   "outputDirectory": "frontend/dist",
   "framework": "vite",
   "env": {
     "GEMINI_API_KEY": "@gemini_api_key"
   },
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "/api"
+    }
+  ],
   "headers": [
     {
       "source": "/api/:path*",
