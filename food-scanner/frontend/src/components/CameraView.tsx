@@ -60,8 +60,8 @@ export const CameraView: React.FC<CameraViewProps> = ({ onCapture }) => {
                     <p style={{ fontSize: '14px', marginTop: '8px', opacity: 0.8 }}>
                         Go to Settings → Privacy → Camera and allow access to this site, then refresh.
                     </p>
-                    <button 
-                        className={styles.captureButton} 
+                    <button
+                        className={styles.captureButton}
                         onClick={() => setPermission('not-requested')}
                         style={{ marginTop: '16px' }}
                     >
@@ -80,8 +80,8 @@ export const CameraView: React.FC<CameraViewProps> = ({ onCapture }) => {
                     <p style={{ fontSize: '14px', marginTop: '8px', opacity: 0.8 }}>
                         Click the button below and allow camera access when prompted.
                     </p>
-                    <button 
-                        className={styles.captureButton} 
+                    <button
+                        className={styles.captureButton}
                         onClick={requestCameraAccess}
                         style={{ marginTop: '16px' }}
                     >

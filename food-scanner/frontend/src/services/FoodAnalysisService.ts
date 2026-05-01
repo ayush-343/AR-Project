@@ -1,7 +1,12 @@
 import axios from 'axios';
 import { FoodAnalysisResult } from '../types/food';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+// Use relative API URL for production (same origin), or environment variable
+const API_BASE_URL = import.meta.env.VITE_API_URL || (
+  import.meta.env.DEV 
+    ? 'http://localhost:8000'
+    : '' // Empty string = use current origin for Vercel
+);
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
